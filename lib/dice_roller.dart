@@ -36,8 +36,8 @@ class _DiceRollerState extends State<DiceRoller> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        Wrap(
+          alignment: WrapAlignment.center,
           children: [
             ...diceRoll.map((d) {
               return Image.asset('assets/images/dice-$d.png', width: 200.0);
