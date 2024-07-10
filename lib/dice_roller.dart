@@ -13,14 +13,12 @@ class DiceRoller extends StatefulWidget {
 }
 
 class _DiceRollerState extends State<DiceRoller> {
-  var diceRoll = [1];
-  var numberOfDice = 1;
+  List<int> diceRoll = [1];
+  int numberOfDice = 1;
 
   void rollDice() {
     setState(() {
-      diceRoll = [
-        for (var i = 0; i < numberOfDice; i++) Random().nextInt(6) + 1
-      ];
+      diceRoll = List.generate(numberOfDice, (i) => randomizer.nextInt(6) + 1);
     });
   }
 
@@ -38,11 +36,9 @@ class _DiceRollerState extends State<DiceRoller> {
       children: [
         Wrap(
           alignment: WrapAlignment.center,
-          children: [
-            ...diceRoll.map((d) {
-              return Image.asset('assets/images/dice-$d.png', width: 200.0);
-            })
-          ],
+          children: diceRoll.map((d) {
+            return Image.asset('assets/images/dice-$d.png', width: 200.0);
+          }).toList(),
         ),
         const SizedBox(height: 20),
         TextButton(
@@ -70,19 +66,18 @@ class _DiceRollerState extends State<DiceRoller> {
             ),
             const SizedBox(width: 10),
             DropdownButton(
-              items: [
-                for (var i = 1; i < 5; i++)
-                  DropdownMenuItem(
-                    value: i,
-                    child: Text(
-                      i.toString(),
-                      style: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                  )
-              ],
+              items: List.generate(4, (i) => i + 1)
+                  .map((i) => DropdownMenuItem(
+                        value: i,
+                        child: Text(
+                          i.toString(),
+                          style: const TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ))
+                  .toList(),
               onChanged: (v) {
                 changeNumberOfDice(v!);
               },
