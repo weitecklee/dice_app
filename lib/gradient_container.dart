@@ -2,7 +2,7 @@ import 'package:dice_app/styled_text.dart';
 import 'package:flutter/material.dart';
 
 class GradientContainer extends StatelessWidget {
-  const GradientContainer({super.key, required this.colors});
+  const GradientContainer(this.colors, {super.key});
 
   final List<Color> colors;
 
